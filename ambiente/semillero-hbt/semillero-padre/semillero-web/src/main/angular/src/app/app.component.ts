@@ -1,3 +1,4 @@
+//Contiene todos los componentes que se creen en la aplicacion.
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 

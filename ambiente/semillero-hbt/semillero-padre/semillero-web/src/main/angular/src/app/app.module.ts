@@ -12,6 +12,8 @@ import { MenuComponent } from './semillero/componentes/menu/menu-component';
 import { BienvenidaComponent } from './semillero/componentes/home/bienvenida-component';
 import { CrearPersonaComponent } from './semillero/componentes/crearPersona/crear-persona-component';
 import { GestionarComicComponent } from './semillero/componentes/gestionarComic/gestionar-comic';
+import { MensajeBienvenidaComponent } from './semillero/componentes/mensajeBienvenida/mensaje-bienvenida-component';
+import { MostrarNombreCiudadComponent } from './semillero/componentes/mostrarNombreCiudad/mostrar-nombre-ciudad';
 
 // DTOs
 export { ComicDTO } from './semillero/dto/comic.dto';
@@ -28,7 +30,9 @@ import {AbstractService} from './semillero/services/template.service';
     MenuComponent,
     BienvenidaComponent,
     CrearPersonaComponent,
-    GestionarComicComponent
+    GestionarComicComponent,
+    MensajeBienvenidaComponent,
+    MostrarNombreCiudadComponent
   ],
   imports: [
     BrowserModule,
