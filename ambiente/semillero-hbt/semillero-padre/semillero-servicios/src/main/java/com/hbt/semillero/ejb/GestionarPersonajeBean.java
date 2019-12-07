@@ -14,7 +14,9 @@ import javax.persistence.PersistenceContext;
 import org.apache.log4j.Logger;
 
 import com.hbt.semillero.dto.ComicDTO;
+import com.hbt.semillero.dto.PersonajeDTO;
 import com.hbt.semillero.entidad.Comic;
+import com.hbt.semillero.entidad.Personaje;
 
 
 /**
@@ -37,9 +39,23 @@ public class GestionarPersonajeBean implements IGestionarPersonajeLocal {
 	}
 
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	public void consultarPersonaje() {
+	public List<PersonajeDTO> consultarPersonaje(Long idComic) {
 		logger.debug("Se ejecuta el read del CRUD");
+		
+		String query = "SELECT personaje " 
+				+	"FROM Personaje personae";
+		
+		List<Personaje> listaPersonajes = EntityManager.createQuery(query)
+				.setParameter("idComic",  idComic).getResultList();
+		
+		List<PersonajeDTO> listaPersonajesDTO = new ArrayList<>();
+		
+		for ( Personaje personaje : listaPersonajes ) {
+			listaPersonajesDTO.add(convertirEntidadDTO(personaje));
+		}
+		
 		logger.debug("Finaliza el read del CRUD");
+		return listaPersonajesDTO;
 	}
 
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
@@ -52,6 +68,33 @@ public class GestionarPersonajeBean implements IGestionarPersonajeLocal {
 	public void eliminarPersonaje() {
 		logger.debug("Se ejecuta el delete del CRUD");
 		logger.debug("Finaliza el delete del CRUD");
+	}
+	
+	private Personaje convertirDTOEntidad(PersonajeDTO personajeDTO) {
+		Personaje personaje = new Personaje();
+		personaje.setId(personajeDTO.getId());
+		personaje.setComic(new Comic());
+		personaje.getComic().setId(personajeDTO.getIdComic());
+		personaje.setEstado(personajeDTO.getEstado());
+		personaje.setSuperPoder(personajeDTO.getSuperPoder());
+		return personaje;
+		
+	}
+	
+	private PersonajeDTO convertirEntidadDTO(Personaje personaje) {
+		PersonajeDTO personajeDTO = new PersonajeDTO();
+		personajeDTO.setId(personajeDTO.getId());
+		personajeDTO.setIdComic(personaje.getComic().getId());
+		personajeDTO.setEstado(personajeDTO.getEstado());
+		personajeDTO.setSuperPoder(personajeDTO.getSuperPoder());
+		return personajeDTO;
+		
+	}
+
+	@Override
+	public List<PersonajeDTO> consultarPersonaje() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "PERSONAJE")
-public class Peronsaje implements Serializable{
+public class Personaje implements Serializable{
 	
 	/**
 	 * 

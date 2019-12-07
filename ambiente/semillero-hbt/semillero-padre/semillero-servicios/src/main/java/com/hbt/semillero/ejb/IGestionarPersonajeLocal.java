@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import com.hbt.semillero.dto.PersonajeDTO;
+
 
 /**
  * Expone los métodos del EJB InformacionPersonajesComic
@@ -28,7 +30,7 @@ public interface IGestionarPersonajeLocal {
 	 * 
 	 * @author Pierre Laurens
 	 */
-	public void consultarPersonaje();
+	public List<PersonajeDTO> consultarPersonaje();
 
 	/**
 	 * 
