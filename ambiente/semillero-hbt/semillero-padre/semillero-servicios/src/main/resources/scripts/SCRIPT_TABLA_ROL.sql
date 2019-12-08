@@ -2,11 +2,11 @@ CREATE TABLE "DB_SEMILLERO"."ROL"
 (	"SRID" NUMBER(3,0) NOT NULL ENABLE,
 "SRNOMBRE" VARCHAR2(50 BYTE) NOT NULL  ENABLE, 
 "SRESTADO" VARCHAR2(50 BYTE) NOT NULL  ENABLE,
-CONSTRAINT "ROL_PK" PRIMARY KEY ("SRID", "SRNOMBRE"),
+CONSTRAINT "ROL_PK" PRIMARY KEY ("SRID"),
 CONSTRAINT "CHK_ROL" CHECK (SRESTADO IN ('ACTIVO', 'INACTIVO'))
 );
 
-comment on column ROL.SRID is 'Campo para identificar el comic';
+comment on column ROL.SRID is 'Campo para la identificacion del rol';
 comment on column ROL.SRNOMBRE is 'Nombre del rol';
 comment on column ROL.SRESTADO is 'Estado del rol';
 
