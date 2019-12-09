@@ -32,6 +32,9 @@ public class GestionarPersonajeBean implements IGestionarPersonajeLocal {
 	
 	final static Logger logger = Logger.getLogger(GestionarPersonajeBean.class);
 
+	@PersistenceContext
+	private EntityManager em;
+	
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public void crearPersonaje() {
 		logger.debug("Se ejecuta el create del CRUD");
@@ -39,14 +42,14 @@ public class GestionarPersonajeBean implements IGestionarPersonajeLocal {
 	}
 
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	public List<PersonajeDTO> consultarPersonaje(Long idComic) {
+	public List<PersonajeDTO> consultarPersonaje(Long idPersonaje) {
 		logger.debug("Se ejecuta el read del CRUD");
 		
 		String query = "SELECT personaje " 
 				+	"FROM Personaje personae";
 		
-		List<Personaje> listaPersonajes = EntityManager.createQuery(query)
-				.setParameter("idComic",  idComic).getResultList();
+		List<Personaje> listaPersonajes = em.createQuery(query)
+				.setParameter("idPersonaje",  idPersonaje).getResultList();
 		
 		List<PersonajeDTO> listaPersonajesDTO = new ArrayList<>();
 		

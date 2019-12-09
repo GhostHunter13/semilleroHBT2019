@@ -2,19 +2,9 @@ package com.hbt.semillero.ejb;
 
 import java.util.List;
 
-import javax.ejb.Local;
+import com.hbt.semillero.dto.RolDTO;
 
-import com.hbt.semillero.dto.PersonajeDTO;
-
-
-/**
- * Expone los métodos del EJB GestionarPersonajesComic
- * 
- * @author Pierre Laurens
- *
- */
-@Local
-public interface IGestionarPersonajeLocal {
+public interface IGestionarRolLocal {
 
 	/**
 	 * 
@@ -22,7 +12,7 @@ public interface IGestionarPersonajeLocal {
 	 * 
 	 * @author Pierre Laurens
 	 */
-	public void crearPersonaje();
+	public void crearRol(RolDTO rol);
 
 	/**
 	 * 
@@ -30,7 +20,7 @@ public interface IGestionarPersonajeLocal {
 	 * 
 	 * @author Pierre Laurens
 	 */
-	public List<PersonajeDTO> consultarPersonaje();
+	public RolDTO consultarRol(Long id);
 
 	/**
 	 * 
@@ -38,7 +28,7 @@ public interface IGestionarPersonajeLocal {
 	 * 
 	 * @author Pierre Laurens
 	 */
-	public void editarPersonaje();
+	public void editarRol();
 
 	/**
 	 * 
@@ -46,7 +36,6 @@ public interface IGestionarPersonajeLocal {
 	 * 
 	 * @author Pierre Laurens
 	 */
-	public void eliminarPersonaje();
-
-
+	public void eliminarRol();
+	
 }
