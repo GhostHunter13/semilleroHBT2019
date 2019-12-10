@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row centrar">
+        <div *ngFor="let comic of comics" class="col-sm-3 cont-comic">
+            <div class="card" style="width: 18rem;">
+                <img [src]="comic.portada" class="item-commic-img" height="300px" class="card-img-top">
+                <div class="card-body">
+                <h5 class="card-title">{{ comic.nombre }}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Editorial: </strong> {{ comic.editorial }}</li>
+                <li class="list-group-item"><strong>Tematica: </strong>{{ comic.tematica }}</li>
+                <li class="list-group-item"><strong>Fecha de venta: </strong>{{ comic.fechaVenta }}</li>
+                <li class="list-group-item"><strong>Autores: </strong>{{ comic.autores }}</li>
+                <li class="list-group-item">
+                    <span *ngIf="comic.aColor" class="badge badge-primary">A color</span>
+                    <span *ngIf="!comic.aColor" class="badge badge-secondary">A blanco y negro</span>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </div>    
+    <button type="button" class="btn btn-danger centrar" (click)="eliminarComic(3)">Eliminar Comic</button>
+</div>
+<div class="container">
+        <div class="row">
+                <div *ngIf="comicBorrado" class="alert alert-success" role="alert">
+                        <h2>Se ha eliminado el comic {{ comicBorrado.nombre }}</h2>
+                </div>
+                <div *ngIf="mostrarMensajeError" class="alert alert-danger" role="alert">
+                        <h2>No existe el elemento a eliminar</h2>
+                </div>
+        </div>
+</div>

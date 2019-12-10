@@ -1,0 +1,12 @@
+.cont-comic {
+    margin: 10px 10px;
+}
+
+.item-comic-img {
+    object-fit: cover;
+}
+
+.centrar {
+    display: flex;
+    justify-content: center;
+}
