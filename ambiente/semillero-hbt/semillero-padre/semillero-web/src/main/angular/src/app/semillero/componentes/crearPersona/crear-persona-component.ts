@@ -2,12 +2,16 @@
  * Importacion de componentes de angular
  */
 import { Component, OnInit } from '@angular/core';
-import { ComicDTO } from '../../dto/comic.dto';
+import { PersonaDTO } from '../../dto/persona.dto';
+
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { PersonaService } from '../../services/persona.service';
 
 /**
  * Se coloca cual es la funcionalidad del componente y el autor. 
  * @description La clase CrearPersonaComponent permite crear personas
- * @author Diego Fernando Alvarez Silva <dalvarez@heinsohn.com.co>
+ * @author Pierre Laurens
  */
 
 /**
@@ -38,16 +42,45 @@ export class CrearPersonaComponent implements OnInit{
      * 4. Metodos a utilizar.
      * 
      */
+    /**
+     * Atributo que contiene los controles del formulario
+     */
+    public gestionarPersonaForm : FormGroup;
 
-    public nombre : String;
-    public nombre2 : String;
+    /**
+     * Atributo que contendra la informacion de la persona
+     */
+    public persona: PersonaDTO;
+
+    /**
+     * Atributo que contendra la lista de personas creadas
+     */
+    public listaPersonas : Array<PersonaDTO>;
+        
+    /**
+     * Atributo que dirá si se creó la persona
+     */
+
+    public creacionExitosa : boolean;
+
+    /**
+     * Atributo que indica si se envio a validar el formulario
+     */
+    public submitted : boolean;
 
     /**
      * No se inicializan variables en el constructor, solo se inyectan componentes, 
      * servicios o librerias necesarias de angular.
      */
-    constructor () {
-        
+    constructor(private personaService: PersonaService,
+        private fb : FormBuilder,
+        private router : Router) {
+        this.gestionarPersonaForm = this.fb.group({
+            nombrePersona : [null, Validators.required],
+            documentoPersona : [null, Validators.required],
+            tipoDocumento : [null, Validators.required],
+            fechaNacimiento : [null, Validators.required]
+        });
     }
 
     /**
@@ -56,8 +89,51 @@ export class CrearPersonaComponent implements OnInit{
      * del componente. 
      */
     ngOnInit(): void {
+        this.persona = new PersonaDTO();
+        this.listaPersonas = new Array<PersonaDTO>();
         
     }
+
+    /**
+     * @description Metodo que permite validar el formulario y crear o actulizar un comic
+     */
+    public crearPersona() : void {
+        this.submitted = true;
+        if(this.gestionarPersonaForm.invalid) {
+            return;
+        }
+        this.persona = new PersonaDTO();
+        this.persona.documento = this.gestionarPersonaForm.controls.documentoPersona.value;
+        this.persona.nombre = this.gestionarPersonaForm.controls.nombrePersona.value;
+        this.persona.tipoDocumento = this.gestionarPersonaForm.controls.tipoDocumento.value;
+        this.persona.fechaNacimiento = this.gestionarPersonaForm.controls.fechaNacimiento.value;
+        
+        this.listaPersonas.push(this.persona);
+
+        this.personaService.crearPersona(this.persona).subscribe(respuesta => {
+            console.log(respuesta);
+            if(respuesta.exitoso == true){
+                this.creacionExitosa = true;
+                this.limpiarFormulario();
+            }else{
+                this.creacionExitosa = false;
+            }
+            setTimeout(()=> {
+            }, 3000);
+        }); 
+
+        this.limpiarFormulario();
+        
+    }
+
+    private limpiarFormulario() : void {
+        this.submitted = false;
+        this.gestionarPersonaForm.controls.documentoPersona.setValue(null);
+        this.gestionarPersonaForm.controls.nombrePersona.setValue(null);
+        this.gestionarPersonaForm.controls.tipoDocumento.setValue(null);
+        this.gestionarPersonaForm.controls.fechaNacimiento.setValue(null);
+    }
+
      
 
 

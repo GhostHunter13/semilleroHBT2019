@@ -1,1 +1,97 @@
+<div class="container">
+    <form [formGroup]="gestionarPersonaForm">
+        <h1>Gestionar Persona</h1>
+        <hr>
 
+        <div class="row">
+            <div class="col-6">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Nombre</span>
+                <input type="text" class="form-control" id="nombrePersona" class="form-control" formControlName="nombrePersona"
+                    [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }" maxlength="50">
+                    <div *ngIf="submitted && f.nombre.errors">
+                            <span class="text-danger" *ngIf="f.nombre.errors.required">Campo requerido.</span>
+                    </div>
+                </div>   
+            </div>
+
+            <div class="col-6">
+                <div class="input-group mb-3">
+                    <label for="tipoDocumento" class="input-group-text" for="tipoDocumento">Tipo Documento</label>
+                    <select formControlName="tipoDocumento" class="custom-select" id="tipoDocumento"
+                        [ngClass]="{ 'is-invalid': submitted }">
+                        <option value="C.C">C.C</option>
+                        <option value="C.E">C.E</option>
+                        <option value="T.I">T.I</option>
+                        <option value="LICENCIA CONDUCCION">Licencia Conduccion</option>
+                    </select>  
+                    <div *ngIf="submitted">
+                        <span class="text-danger" *ngIf="f.nombre.errors.required">Campo requerido.</span>
+                    </div>  
+                </div>       
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Documento</span>
+                    <input type="text" class="form-control" id="documentoPersona" class="form-control" formControlName="documentoPersona"
+                        [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }" maxlength="50">
+                        <div *ngIf="submitted && f.nombre.errors">
+                                <span class="text-danger" *ngIf="f.nombre.errors.required">Campo requerido.</span>
+                        </div>
+                    </div>   
+            </div>
+
+            <div class="col-6">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Fecha Nacimiento</span>
+                    <input type="date" class="form-control" id="fechaNacimientoPersona" class="form-control" formControlName="fechaNacimientoPersona"
+                        [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }">
+                        <div *ngIf="submitted && f.nombre.errors">
+                                <span class="text-danger" *ngIf="f.nombre.errors.required">Campo requerido.</span>
+                        </div>
+                    </div>   
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="col-6">
+                <span></span>
+            </div>
+            <div class="col-6 text-right">
+                <button type="button" class="btn btn-primary" (click)="crearPersona()">Crear</button>
+            </div>
+        </div>
+
+        <br>
+        
+        <div class="row" [hidden]="listaPersonas.length === 0">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Documento</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Tipo de Documento</th>
+                            <th scope="col">Fecha Nacimiento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--date:"MM/dd/yy"
+                        | uppercase-->
+                        <tr *ngFor="let persona of listaPersonas;let i=index;">
+                            <th scope="row">{{persona.documentoPersona}}</th>
+                            <td>{{persona.nombrePersona | uppercase }}</td>
+                            <td>{{persona.tipoDocumento }}</td>
+                            <td>{{persona.fechaNacimiento }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+
+</div>

@@ -18,6 +18,7 @@ import { ListarComicsComponent } from './semillero/componentes/listaComics/lista
 // DTOs
 export { ComicDTO } from './semillero/dto/comic.dto';
 export { ResultadoDTO } from './semillero/dto/resultado.dto';
+export { PersonaDTO } from './semillero/dto/persona.dto';
 
 //Manejo de servicios
 
